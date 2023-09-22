@@ -33,6 +33,7 @@ const putUsuarios = async(req, res = response) => {
     }
 
     const usuario = await Usuario.findByIdAndUpdate(id, resto);
+    
     res.json({
         usuario
     })
@@ -57,11 +58,17 @@ const deleteUsuarios = async (req, res) => {
 
     const {id} = req.params;
 
+    const uid = req.uid;
+
+    const usuarioAutenticado = req.usuarioAutenticado;
+
     //const usuario = await Usuario.findByIdAndDelete(id);
     const usuario = await Usuario.findByIdAndUpdate(id, {estado: false}); 
     res.json({
         id,
-        usuario
+        uid,
+        usuario,
+        usuarioAutenticado
     })
   };
 
